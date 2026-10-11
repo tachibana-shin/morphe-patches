@@ -27,6 +27,43 @@ object Constants {
         )
     )
 
+    /**
+     * Zepp (formerly Amazfit), the companion app for Huami/Xiaomi wearables.
+     *
+     * Unlike APKPure this app ships no third party advertising at all: the only
+     * ad related code is Huami's own dormant splash/launch scaffold
+     * (`com.huami.ad`, seven classes) behind an AdMob app id that is declared
+     * in the manifest without the AdMob SDK ever being bundled. There is
+     * therefore nothing for an ad patch to remove.
+     *
+     * What the app does ship instead is an in house telemetry pipeline plus
+     * native anti tamper probes, which is what the telemetry patch targets.
+     *
+     * The icon background is the plain blue of the adaptive icon layer
+     * (#0154D0); the foreground glyph is white.
+     *
+     * Declared as XAPK because the release is split: the base APK
+     * (com.huami.watch.hmwatchmanager.apk, code only) is paired with an ABI
+     * split (config.armeabi_v7a.apk) that carries all 132 native libraries.
+     * Only armeabi-v7a is published, so there is no arm64 variant to declare.
+     */
+    val COMPATIBILITY_ZEPP = Compatibility(
+        name = "Zepp",
+        packageName = "com.huami.watch.hmwatchmanager",
+        apkFileType = ApkFileType.XAPK,
+        appIconColor = 0x0154D0,
+        targets = listOf(
+            // Fully analysed target. Every fingerprint in the telemetry patch
+            // was written against this build.
+            AppTarget(
+                version = "10.9.0-play",
+                versionCodes = mapOf(
+                    SupportedAbi.ARMEABI_V7A to 151983
+                )
+            )
+        )
+    )
+
     val COMPATIBILITY_EXAMPLE = Compatibility(
         name = "XYZ app", // App name as it appears in the Android launcher.
         packageName = "com.example.app",
