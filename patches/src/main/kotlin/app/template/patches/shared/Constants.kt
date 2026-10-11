@@ -6,6 +6,27 @@ import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.SupportedAbi
 
 object Constants {
+    /**
+     * APKPure app store.
+     *
+     * The icon background is plain white (#FEFEFE); the declared colour is the
+     * green brand accent that dominates the glyph so entries stay recognisable
+     * in Morphe Manager.
+     */
+    val COMPATIBILITY_APKPURE = Compatibility(
+        name = "APKPure",
+        packageName = "com.apkpure.aegon",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x00C862,
+        targets = listOf(
+            // Fully analysed target. Every fingerprint in the ad patches below
+            // was written against this build.
+            AppTarget(
+                version = "3.20.7902"
+            )
+        )
+    )
+
     val COMPATIBILITY_EXAMPLE = Compatibility(
         name = "XYZ app", // App name as it appears in the Android launcher.
         packageName = "com.example.app",
